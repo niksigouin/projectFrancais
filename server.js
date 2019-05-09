@@ -24,6 +24,9 @@ wss.on('connection', function (ws, req) {
     connects.push(ws);
     console.log("New Client Connected : " + connects.length);
 
+    // Get client IP
+    const ip = req.connection.remoteAddress;
+
     // Callback from client message
     ws.on('message', function (message) {
         console.log('received: %s', message);

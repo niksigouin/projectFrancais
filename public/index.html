@@ -23,12 +23,18 @@
     Message from server : <span id='message'></span>
   </div>
 
+  <div>
+    <p>Rouge</p>
+    <input type="range" min="0" max="100" value="50">
+  </div>
+
   <script>
 
       var host = location.hostname;
       console.log("Host : ", host);
       var ws = new WebSocket('ws://' + host + ':8080');
 
+      
       // Callback from server message
       ws.onmessage = function (event) {
           var receivedMessage = event.data;
