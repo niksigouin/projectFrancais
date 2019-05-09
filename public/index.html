@@ -71,7 +71,12 @@
       // Sends slider value
       Redslider.onchange = function() {
         ws.send(uID+','+'r'+','+this.value);
-        //console.log(this.value);
+      };
+      Greenslider.onchange = function() {
+        ws.send(uID+','+'g'+','+this.value);
+      };
+      Blueslider.onchange = function() {
+        ws.send(uID+','+'b'+','+this.value);
       };
 
       // Callback from server message
