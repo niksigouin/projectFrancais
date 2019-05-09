@@ -8,6 +8,7 @@
   </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="/uID.js"></script>
 </head>
 <body>
   <div>
@@ -39,8 +40,8 @@
   </form>
   <canvas id="myCanvas" width="300" height="300"></canvas>
   <script>
-      var uID = Math.floor(Math.random() * (+100 - +1)) + +1
-      console.log(uID)
+      // var uID = Math.floor(Math.random() * (+5 - +1)) + +1
+      // console.log(uID)
 
       var Redslider = document.getElementById("redVal");
       var Redoutput = document.getElementById("red");
@@ -67,6 +68,9 @@
       var host = location.hostname;
       console.log("Host : ", host);
       var ws = new WebSocket('ws://' + host + ':8080');
+
+      var uID = uID()
+      // ws.send(uID);
 
       // Sends slider value
       Redslider.onchange = function() {
