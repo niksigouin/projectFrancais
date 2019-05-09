@@ -23,12 +23,43 @@
     Message from server : <span id='message'></span>
   </div>
 
-  <div>
-    <p>Rouge</p>
-    <input type="range" min="0" max="100" value="50">
+  <div class="sliderscontainer">
+    <div >
+        <p>Rouge: <span id="red"></span></p>
+        <input type="range" min="0" max="100" value="50" id="redVal">
+    </div>
+    <div >
+        <p>Vert: <span id="green"></span></p>
+        <input type="range" min="0" max="100" value="50" id="greenVal">
+    </div>
+    <div >
+        <p>Bleu: <span id="blue"></span></p>
+        <input type="range" min="0" max="100" value="50" id="blueVal">
+    </div>
   </div>
 
   <script>
+      var Redslider = document.getElementById("redVal");
+      var Redoutput = document.getElementById("red");
+      var Greenslider = document.getElementById("greenVal");
+      var Greenoutput = document.getElementById("green");
+      var Blueslider = document.getElementById("blueVal");
+      var Blueoutput = document.getElementById("blue");
+
+      Redoutput.innerHTML = Redslider.value;
+      Greenoutput.innerHTML = Greenslider.value;
+      Blueoutput.innerHTML = Blueslider.value;
+
+      Redslider.oninput = function() {
+        Redoutput.innerHTML = this.value;
+      }
+      Greenslider.oninput = function() {
+        Greenoutput.innerHTML = this.value;
+      }
+      Blueslider.oninput = function() {
+        Blueoutput.innerHTML = this.value;
+      }
+
 
       var host = location.hostname;
       console.log("Host : ", host);
@@ -42,6 +73,7 @@
           $('#message').html(receivedMessage);
       };
 
+      $("form").
       $("form").submit(function(e){
           var message = $("#msgForm").val();
           $("#msgForm").val('');
