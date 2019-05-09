@@ -39,6 +39,9 @@
   </form>
 
   <script>
+      var Random = Math.floor(Math.random() * (+100 - +1)) + +1
+      console.log(Random)
+      
       var Redslider = document.getElementById("redVal");
       var Redoutput = document.getElementById("red");
       var Greenslider = document.getElementById("greenVal");
@@ -65,6 +68,11 @@
       console.log("Host : ", host);
       var ws = new WebSocket('ws://' + host + ':8080');
 
+      // Sends slider value
+      Redslider.onpointerup = function() {
+        ws.send(this.value);
+        console.log(this.value);
+      };
 
       // Callback from server message
       ws.onmessage = function (event) {
@@ -72,12 +80,7 @@
           console.log(receivedMessage);
           $('#message').html(receivedMessage);
       };
-
-      Redslider.onpointerup = function() {
-        ws.send(this.value);
-        console.log(this.value);
-      };
-
+      
       $("form").submit(function(e){
           var message = $("#msgForm").val();
           $("#msgForm").val('');
