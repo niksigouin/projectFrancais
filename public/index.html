@@ -65,7 +65,7 @@
       console.log("Host : ", host);
       var ws = new WebSocket('ws://' + host + ':8080');
 
-      
+
       // Callback from server message
       ws.onmessage = function (event) {
           var receivedMessage = event.data;
@@ -74,8 +74,8 @@
       };
 
       Redslider.onpointerup = function() {
-        ws.send(Redslider.value);
-        console.log(this);
+        ws.send(this.value);
+        console.log(this.value);
       };
 
       $("form").submit(function(e){
