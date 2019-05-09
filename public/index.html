@@ -73,7 +73,7 @@
           $('#message').html(receivedMessage);
       };
 
-      Redslider.onpointerup.value = function() {
+      Redslider.onpointerup = function() {
         ws.send(Redslider.value);
         console.log(this);
       };
