@@ -75,7 +75,9 @@
 
       Redslider.onpointerup = function() {
         ws.send(this)
+        
       }
+
       $("form").submit(function(e){
           var message = $("#msgForm").val();
           $("#msgForm").val('');
