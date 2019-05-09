@@ -23,7 +23,7 @@
     Message from server : <span id='message'></span>
   </div>
 
-  <div class="sliderscontainer">
+  <form action="/" method="post" id="sliderContainer">
     <div >
         <p>Rouge: <span id="red"></span></p>
         <input type="range" min="0" max="100" value="50" id="redVal">
@@ -36,7 +36,7 @@
         <p>Bleu: <span id="blue"></span></p>
         <input type="range" min="0" max="100" value="50" id="blueVal">
     </div>
-  </div>
+  </form>
 
   <script>
       var Redslider = document.getElementById("redVal");
@@ -73,7 +73,9 @@
           $('#message').html(receivedMessage);
       };
 
-      $("form").
+      Redslider.onpointerup = function() {
+        ws.send(this)
+      }
       $("form").submit(function(e){
           var message = $("#msgForm").val();
           $("#msgForm").val('');
