@@ -39,7 +39,8 @@ wss.on('connection', function (ws, req) {
             return (conn === ws) ? false : true;
         });
     });
-
+    var Random = Math.floor(Math.random() * (+100 - +1)) + +1
+    console.log(Random)
 });
 
 server.listen(8080, function listening() {
