@@ -8,6 +8,8 @@
   </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="/uID.js"></script>
+    <!-- <script src="/projectFrancais/server.js"></script> -->
 </head>
 <body>
   <div>
@@ -17,10 +19,17 @@
           <input type="text" class="form-control" id="msgForm">
         </section>
         <button type="submit" class="btn btn-primary">Send</button>
+        <section class="form-group">
+          <label for="userName">Name：</label>
+          <input type="text" class="form-control" id="userName">
+        </section>
     </form>
   </div>
   <div>
     Message from server : <span id='message'></span>
+  </div>
+  <div>
+    Your name: <span id="userID"></span>
   </div>
 
   <form action="/" method="post" id="sliderContainer">
@@ -39,8 +48,8 @@
   </form>
 
   <script>
-      var uID = Math.floor(Math.random() * (+100 - +1)) + +1
-      console.log(uID)
+      // var uID = Math.floor(Math.random() * (+5 - +1)) + +1
+      // console.log(uID)
 
       var Redslider = document.getElementById("redVal");
       var Redoutput = document.getElementById("red");
@@ -48,6 +57,8 @@
       var Greenoutput = document.getElementById("green");
       var Blueslider = document.getElementById("blueVal");
       var Blueoutput = document.getElementById("blue");
+
+      var id = document.getElementById('userName');
 
       Redoutput.innerHTML = Redslider.value;
       Greenoutput.innerHTML = Greenslider.value;
@@ -63,20 +74,27 @@
         Blueoutput.innerHTML = this.value;
       }
 
+      userName.oninput = function() {
+        userID.innerHTML = this.value;
+      }
 
       var host = location.hostname;
       console.log("Host : ", host);
       var ws = new WebSocket('ws://' + host + ':8080');
 
+      // var id = .value;
+      console.log(id);
+      // ws.send(uID);
+
       // Sends slider value
       Redslider.onchange = function() {
-        ws.send(uID+','+'r'+','+this.value);
+        ws.send(id.value+'r'+','+this.value);
       };
       Greenslider.onchange = function() {
-        ws.send(uID+','+'g'+','+this.value);
+        ws.send(id.value+'g'+','+this.value);
       };
       Blueslider.onchange = function() {
-        ws.send(uID+','+'b'+','+this.value);
+        ws.send(id.value+'b'+','+this.value);
       };
 
       // Callback from server message
