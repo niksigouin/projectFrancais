@@ -1,10 +1,50 @@
 <!DOCTYPE html>
 <html lang="ja">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
   <style>
     div{
       margin: 10px;
     }
+    <style>
+      .slidecontainer {
+        width: 100%;
+      }
+
+      .slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+      }
+
+      .slider:hover {
+        opacity: 1;
+      }
+
+      .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: #d3d3d3;
+        cursor: pointer;
+      }
+
+      .slider::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #4CAF50;
+        cursor: pointer;
+      }
+</style>
   </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -14,36 +54,36 @@
 <body>
   <div>
     <form class="form-inline">
-        <section class="form-group">
+        <!-- <section class="form-group">
           <label for="msgForm">Message：</label>
           <input type="text" class="form-control" id="msgForm">
         </section>
-        <button type="submit" class="btn btn-primary">Send</button>
+        <button type="submit" class="btn btn-primary">Send</button> -->
         <section class="form-group">
-          <label for="userName">Name：</label>
+          <label for="userName">Entrez un nombre entre 1 et 25：</label>
           <input type="text" class="form-control" id="userName">
         </section>
     </form>
   </div>
   <div>
-    Message from server : <span id='message'></span>
+    <!-- Message from server : <span id='message'></span> -->
   </div>
   <div>
-    Your name: <span id="userID"></span>
+    Votre numéro: <span id="userID"></span>
   </div>
 
   <form action="/" method="post" id="sliderContainer">
     <div >
         <p>Rouge: <span id="red"></span></p>
-        <input type="range" min="0" max="100" value="50" id="redVal">
+        <input type="range" min="0" max="100" value="50" id="redVal" class='slider' style='background: red'>
     </div>
-    <div >
+    <div style='margin-top: 75px; margin-bottom: 75px'>
         <p>Vert: <span id="green"></span></p>
-        <input type="range" min="0" max="100" value="50" id="greenVal">
+        <input type="range" min="0" max="100" value="50" id="greenVal" class='slider' style='background: green'>
     </div>
     <div >
         <p>Bleu: <span id="blue"></span></p>
-        <input type="range" min="0" max="100" value="50" id="blueVal">
+        <input type="range" min="0" max="100" value="50" id="blueVal" class='slider' style='background: blue'>
     </div>
   </form>
 
@@ -66,12 +106,15 @@
 
       Redslider.oninput = function() {
         Redoutput.innerHTML = this.value;
+        ws.send(id.value+'r'+','+this.value);
       }
       Greenslider.oninput = function() {
         Greenoutput.innerHTML = this.value;
+        ws.send(id.value+'g'+','+this.value);
       }
       Blueslider.oninput = function() {
         Blueoutput.innerHTML = this.value;
+        ws.send(id.value+'b'+','+this.value);
       }
 
       userName.oninput = function() {
@@ -87,15 +130,11 @@
       // ws.send(uID);
 
       // Sends slider value
-      Redslider.onchange = function() {
-        ws.send(id.value+'r'+','+this.value);
-      };
-      Greenslider.onchange = function() {
-        ws.send(id.value+'g'+','+this.value);
-      };
-      Blueslider.onchange = function() {
-        ws.send(id.value+'b'+','+this.value);
-      };
+      // Redslider.onchange = function() {
+      //   ws.send(id.value+'r'+','+this.value);
+      // };
+
+
 
       // Callback from server message
       ws.onmessage = function (event) {
