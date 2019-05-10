@@ -7,9 +7,10 @@ var express = require('express'),
 var app = express(),
     server = http.createServer(app),
     wss = new webSocket.Server({ server:server });
-
+    // CLIENTS = [];
 // client connections
 var connects = []
+
 
 // --------------------------------------------------------------
 
@@ -25,7 +26,11 @@ wss.on('connection', function (ws, req) {
     console.log("New Client Connected : " + connects.length);
 
     // Get client IP
+    
 
+    wss.clients.forEach(function each(client) {
+        console.log('Client.ID: ' + client.id);
+    });
     // const ip = req.connection.remoteAddress;
 
     // Callback from client message
